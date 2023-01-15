@@ -5,31 +5,31 @@ util.require_natives("")
 
 -- github version check and update
 local response = false
-local localVer = 1.0.4
+local localVer = 1.0
 local currentVer
-async_http.innit("raw.githubusercontent.com", "NOTLAZERY/kiril-menu/main/version.txt")
-    current_version = tonumber(output)
+async_http.init("raw.githubusercontent.com", "/NOTLAZERY/kiril-menu/main/version.txt", function(output)
+    currentVer = tonumber(output)
     response = true
-    if local version ~= currentVer then
-        util_toast("kiril menu", "new version available",)
-        menu.action(menu.my_root(), "update", {}, "", function()
-            async_http.init('raw.githubusercontent.com', 'NOTLAZERY/kiril-menu/main/kiril-menu.lua', function(a))
-                local err = select(2, load(a))
+    if localVer ~= currentVer then
+        util.toast("new version available, update this shit allready!.")
+        menu.action(menu.my_root(), "Update", {}, "", function()
+            async_http.init('raw.githubusercontent.com','/NOTLAZERY/kiril-menu/main/kiril%20menu.lua',function(a)
+                local err = select(2,load(a))
                 if err then
-                    util_toast("error loading update", "if the error download the update manually",)
+                    util.toast("aww man, something went wrong. ")
                 return end
-                local fn io.open(filesystem.scripts.dir().. SCRIPT_RELPATH, "wb")
+                local f = io.open(filesystem.scripts_dir()..SCRIPT_RELPATH, "wb")
                 f:write(a)
                 f:close()
-                util_toast("kiril menu", "updated",)
+                util.toast("holy shit it worked. Restarting Script... :)")
                 util.restart_script()
             end)
             async_http.dispatch()
-        end
+        end)
     end
-end, function() response = true end)
+end, function() response = true end) 
 async_http.dispatch()
-repeat
+repeat 
     util.yield()
 until response
 
