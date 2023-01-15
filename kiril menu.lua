@@ -5,7 +5,7 @@ util.require_natives("")
 
 -- github version check and update
 local response = false
-local localVer = 1.0.3
+local localVer = 1.0.4
 local currentVer
 async_http.innit("raw.githubusercontent.com", "NOTLAZERY/kiril-menu/main/version.txt")
     current_version = tonumber(output)
@@ -33,3 +33,4 @@ repeat
     util.yield()
 until response
 
+--does this shit even work?i dont know
