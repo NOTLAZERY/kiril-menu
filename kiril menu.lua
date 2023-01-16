@@ -3,7 +3,7 @@ util.require_natives("lua_imGUI V2-1")
 
 -- github version check and update
 local response = false
-local localVer = "1.3"
+local localVer = "1.4"
 local currentVer
 async_http.init("raw.githubusercontent.com", "/NOTLAZERY/kiril-menu/master/version.txt", function(output)
     currentVer = tonumber(output)
